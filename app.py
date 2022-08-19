@@ -1,8 +1,8 @@
-from flask import Flask, jsonify, make_response, request
+from flask import Flask, jsonify, make_response, request, render_template
 from flask_mongoengine import MongoEngine
 from api_constants import mongodb_password
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 database_name = "API"
 
@@ -30,7 +30,7 @@ class Book(db.Document):
 @app.route('/')
 def index():
 
-    return "Hello World"
+    return render_template("index.html")
 
 
 @app.route('/api/db_populate/', methods=['POST'])
