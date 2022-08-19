@@ -22,14 +22,14 @@ class Book(db.Document):
     publisher = db.StringField()
     publishedDate = db.StringField()
     description = db.StringField()
-    pageCount = db.StringField()
-    printedPageCount = db.StringField()
+    pageCount = db.IntField()
+    printedPageCount = db.IntField()
     language = db.StringField()
     printType = db.StringField()
-    averageRating = db.DoubleField()
+    averageRating = db.FloatField()
     maturityRating = db.StringField()
     ratingsCount = db.IntField()
-    imageLinks = []
+    imageLinks = db.ListField()
 
     def to_json(self):
 
@@ -77,7 +77,9 @@ def index():
 
 @app.route('/api/db_populate/', methods=['POST'])
 def db_populate():
-    images = []
+    images = [
+        'http://books.google.com/books/content?id=s1gVAAAAYAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70oTyr8gpi_cNmpt2Vo0N3IPo4PFdw8yCo4LFBwDcFD6l7XjtpX-5bCMZHIbDpEtzZV0_lfSF0PAyhVTyZHuWIOFAUHvXYpc-wPi-pVdIG0_xhXYAiTcQMeA7vWVp1I9o5A6a53&source=gbs_api'
+    ]
     book1 = Book(book_id=1,
                  title="Pride and Prejudice",
                  author="Jane Austen",
